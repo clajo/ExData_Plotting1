@@ -16,14 +16,15 @@ d<-transform(d,DateTime=as.POSIXct(paste(d$Date, d$Time), format="%Y-%m-%d %H:%M
 curr_locale <- Sys.getlocale("LC_TIME")
 Sys.setlocale("LC_TIME", "C")
 
+#Open graphic device png
+png(file="plot2.png",width=480,height=480,units="px")
+
 #Plot line chart
 par(mfcol=c(1,1))
 with(d,plot(d$DateTime,d$Global_active_power,type="n",ylab="Global Active Power (kilowatts)",xlab=""))
 lines(d$DateTime,d$Global_active_power)
 
-
-#Save plot as png file
-dev.copy(png,"plot2.png",width=480,height=480,units="px",type = "cairo")
+#Close graphic device
 dev.off()
 
 #Set the system time back to original setting

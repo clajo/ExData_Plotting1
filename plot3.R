@@ -16,6 +16,9 @@ d<-transform(d,DateTime=as.POSIXct(paste(d$Date, d$Time), format="%Y-%m-%d %H:%M
 curr_locale <- Sys.getlocale("LC_TIME")
 Sys.setlocale("LC_TIME", "C")
 
+#Open graphic device png
+png(file="plot3.png",width=480,height=480,units="px")
+
 #Plot line chart
 par(mfcol=c(1,1))
 with(d,plot(d$DateTime,d$Sub_metering_1,type="n",ylab="Energy sub metering",xlab=""))
@@ -25,10 +28,9 @@ lines(d$DateTime,d$Sub_metering_3, col="blue")
 #Margins
 par(mar=c(5, 4, 2, 1))
 #Legend
-legend('topright',legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),lty=1, cex=.75,col=c("black","red","blue"),text.width=43000)
+legend('topright',legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),lty=1, col=c("black","red","blue"))
 
-#Save plot as png file
-dev.copy(png,"plot3.png",width=480,height=480,units="px",type = "cairo")
+#Close graphic device
 dev.off()
 
 #Set the system time back to original setting

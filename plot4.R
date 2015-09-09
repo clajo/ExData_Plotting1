@@ -20,6 +20,9 @@ d<-transform(d,DateTime=as.POSIXct(paste(d$Date, d$Time), format="%Y-%m-%d %H:%M
 curr_locale <- Sys.getlocale("LC_TIME")
 Sys.setlocale("LC_TIME", "C")
 
+#Open graphic device png
+png(file="plot4.png",width=480,height=480,units="px")
+
 #Set layout to 2x2 
 par(mfcol=c(2,2))
 #margins
@@ -34,7 +37,7 @@ with(d,plot(d$DateTime,d$Sub_metering_1,type="n",ylab="Energy sub metering",xlab
 lines(d$DateTime,d$Sub_metering_1)
 lines(d$DateTime,d$Sub_metering_2, col="red")
 lines(d$DateTime,d$Sub_metering_3, col="blue")
-legend('topright',legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),lty=1,cex=.5,col=c("black","red","blue"),bty="n",text.width=60000 )
+legend('topright',legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),lty=1,cex=1,col=c("black","red","blue"),bty="n")
 
 #Plot chart top right
 with(d,plot(d$DateTime,d$Voltage,type="n",ylab="Voltage",xlab="datetime"))
@@ -44,8 +47,7 @@ lines(d$DateTime,d$Voltage)
 with(d,plot(d$DateTime,d$Global_reactive_power,type="n",ylab="Global_reactive_power",xlab="datetime"))
 lines(d$DateTime,d$Global_reactive_power)
 
-#Save plots as png file
-dev.copy(png,"plot4.png",width=480,height=480,units="px",type = "cairo")
+#Close graphic device
 dev.off()
 
 #Set the system time back to original setting

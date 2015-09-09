@@ -11,10 +11,12 @@ d<-transform(d,Date=as.Date(strptime(Date,"%d/%m/%Y")))
 #Filter data
 d<-filter(d,Date=="2007-02-01" | Date=="2007-02-02")
 
+#Open graphic device png
+png(file="plot1.png",width=480,height=480,units="px")
+
 #Plot histogram 
 par(mfcol=c(1,1))
 hist(d$Global_active_power,col="red",main="Global Active Power", xlab="Global Active Power (kilowatts)")
 
-#Save plot as png file
-dev.copy(png,"plot1.png",width=480,height=480,units="px",type = "cairo")
+#Close graphic device
 dev.off()
